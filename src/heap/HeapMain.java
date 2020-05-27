@@ -11,16 +11,16 @@ import dados.DadosDoCadastro;
 
 public class HeapMain {
 	public static void main(String[] args) throws IOException {
-		String teste = "";
 		LeArquivo ler = new LeArquivo("./src/arquivosDeTeste/imovel500alea.txt");
-//		ler.leArquivo(500);
-		GravaArquivo gravar = new GravaArquivo("./src/arquivosAlterados/teste2.txt");
+		GravaArquivo gravar = new GravaArquivo("./src/arquivosAlterados/teste1.txt");
 		
-	
-		teste = ler.leArquivo(500).toString();
-		System.out.println(teste);
+		//vetor receber o tamanho 500 e vetor recebe os dados e parametros do metodo lerAruivos.
+		CadastroImobiliadrioVetor vetor = ler.leArquivo(500);
 		
-		gravar.gravaArquivo(teste);
+		vetor.heapSort();
+		System.out.println(vetor.toString());
+		
+		gravar.gravaArquivo(vetor.toString());
 		
 		ler.fecharArquivo();
 		gravar.fechaArquivo();
