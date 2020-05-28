@@ -11,8 +11,13 @@ import dados.DadosDoCadastro;
 
 public class HeapMain {
 	public static void main(String[] args) throws IOException {
+		long tempoInicial;
+        long tempoFinal;
+        long tempoGasto;
 		LeArquivo ler = new LeArquivo("./src/arquivosDeTeste/imovel500alea.txt");
-		GravaArquivo gravar = new GravaArquivo("./src/arquivosAlterados/teste1.txt");
+		GravaArquivo gravar = new GravaArquivo("./src/arquivosAlterados/imovel500alea.txt");
+		
+		tempoInicial = System.currentTimeMillis();
 		
 		//vetor receber o tamanho 500 e vetor recebe os dados e parametros do metodo lerAruivos.
 		CadastroImobiliadrioVetor vetor = ler.leArquivo(500);
@@ -24,6 +29,10 @@ public class HeapMain {
 		
 		ler.fecharArquivo();
 		gravar.fechaArquivo();
+		
+		tempoFinal = System.currentTimeMillis();
+		tempoGasto = (tempoFinal-tempoInicial);
+		System.out.println("Tempo de execução: "+tempoGasto+" ms" );
 	}
 	
 }
