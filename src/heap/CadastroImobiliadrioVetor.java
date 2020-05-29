@@ -1,5 +1,7 @@
 package heap;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Arrays;
 
 import dados.DadosDoCadastro;
@@ -59,11 +61,21 @@ public class CadastroImobiliadrioVetor {
 		return msg;
 	}
 
-	/*
-	 * class Dados{ private Item[] vetor; //referência a um vetor de itens private
-	 * int nElem; //número de itens de dados //construtor(es) e métodos desta classe
-	 * }
-	 */
+	public int comparar(DadosDoCadastro dados1, DadosDoCadastro dados2) {
+		if (dados1.getCpf().compareTo(dados2.getCpf()) < 0) {
+			return -1;
+		} else if (dados1.getCpf().compareTo(dados2.getCpf()) > 0) {
+			return 1;
+		} else if (dados1.getInscricao().compareTo(dados2.getInscricao()) < 0) {
+			return -1;
+		} else if (dados1.getInscricao().compareTo(dados2.getInscricao()) > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+
+	}
+
 	// HeapSort ordenação
 	public void heapSort() {
 		int dir = quantVet - 1;
@@ -91,24 +103,135 @@ public class CadastroImobiliadrioVetor {
 
 		while ((mF <= dir) && (!heap)) {
 			if (mF < dir) {
-				//verifica se tem um valor a direito do maior filho
+				// verifica se tem um valor a direito do maior filho
 				// se tiver o maior filhor passa a ser o próximo valor
 				// seria o 2i+2
-				if (this.vetor[mF].getCpf().compareTo(this.vetor[mF + 1].getCpf()) < 0)
+
+				if (comparar(this.vetor[mF], this.vetor[mF + 1]) < 0) {
 					mF++;
+				}
 			}
 			// Se a raiz for menor que o maior filho, ocorre a troca. Volta e verifica se
 			// sub-árvore continuará heap
-			if (raiz.getCpf().compareTo(this.vetor[mF].getCpf()) < 0) {
+			if (comparar(raiz, this.vetor[mF]) < 0) {
 				this.vetor[i] = this.vetor[mF];
 				i = mF;
 				mF = 2 * i + 1;
 			} else
 				heap = true;
 		}
-		
+
 		this.vetor[i] = raiz;
 	}
 
+	// pesquisa binária por cpf
+	public int pesqBinaria(String chave) {
+		int meio, esq, dir;
+		esq = 0;
+		dir = this.quantVet - 1;
+		while (esq <= dir) {
+			meio = (esq + dir) / 2;
+			if (chave.equals(this.vetor[meio].getCpf()))
+				return meio;
+			else {
+				if (chave.compareTo(this.vetor[meio].getCpf()) < 0)
+					dir = meio - 1;
+				else
+					esq = meio + 1;
+			}
+		}
+		return -1;
+	}
+
+	public void pesquisarCpfImovel() {
+		int indice = 0;
+		String naoAchou = "";
+		int esq = 0;
+		int dir = 0;
+		String msg = "";
+		String[] vetorCpf = pesquisarCpf(); // vetor com dados do Imovel.txt
+		// variavel para pegar o vetor do Imovel.txt
+		String cpf = "";
+		
+		String msgEsq="";
+		String inscricaoNaoPago;
+		String inscricao;
+		Double impostoPago;
+		Double impostoNaoPago;
+		Double impostoTotalApagar = 0.0;
+		String pago;
+		String NaoPago;
+		String cpfIguais;
+		for (int i = 0; i < vetorCpf.length; i++) {
+			cpf = vetorCpf[i];
+			indice = pesqBinaria(cpf);
+
+			if (indice != -1) {
+				if (this.vetor[indice].getCpf().equals(this.vetor[indice-1].getCpf())) {
+					esq = indice - 1;
+					if(this.vetor[esq].isPago()==false) {
+						inscricao=this.vetor[esq].getInscricao();
+						impostoNaoPago=this.vetor[esq].getValor();
+						NaoPago="NÃO PAGO";
+						impostoTotalApagar+=impostoNaoPago;
+					
+					}else {
+						inscricao=this.vetor[esq].getInscricao();
+						impostoPago=this.vetor[esq].getValor();
+						pago="PAGO";
+					}
+					
+					msg+=this.vetor[esq].getCpf()+":"+"\n"+"Inscr: "+this.vetor[esq].getInscricao()+" "+"Imposto: "+this.vetor[esq].getValor();
+				}
+				if (this.vetor[indice].getCpf().equals(this.vetor[indice+1].getCpf())) {
+					dir = indice + 1;
+							
+					if(this.vetor[dir].isPago()==false) {
+						inscricaoNaoPago=this.vetor[dir].getInscricao();
+						impostoNaoPago=this.vetor[dir].getValor();
+						NaoPago="NÃO PAGO";
+						impostoTotalApagar+=impostoNaoPago;
+					}else {
+						inscricao=this.vetor[dir].getInscricao();
+						impostoPago=this.vetor[dir].getValor();
+						pago="PAGO";
+					}
+					msg+=this.vetor[dir].getCpf()+":"+"\n"+"Inscr: "+this.vetor[dir].getInscricao()+" "+"Imposto: "+this.vetor[dir].getValor();
+				}
+				msg+="CPF: "+this.vetor[indice].getCpf()+"\n";
+				System.out.println(msg);
+			} else {
+				if (indice == -1) {
+					naoAchou = cpf;
+				}
+			}
+		}
+
+	}
+
+	public String[] pesquisarCpf() {
+		String arquivos = "./src/arquivosDeTeste/Imovel.txt";
+		int i = 0;
+		String cpf = null;
+		String[] vetorCpf = new String[400];
+		try {
+			FileReader arq = new FileReader(arquivos);
+			BufferedReader lerArq = new BufferedReader(arq);
+
+			String linha = lerArq.readLine();
+			while (linha != null) {
+				cpf = linha;
+
+				vetorCpf[i] = cpf;
+				i++;
+				linha = lerArq.readLine(); // lê da segunda até a última linha
+			}
+
+		} catch (Exception e) {
+			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+		}
+		return vetorCpf;
+
+	}
 
 }
