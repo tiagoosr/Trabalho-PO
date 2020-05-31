@@ -2,7 +2,6 @@ package heap;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Arrays;
 
 import dados.DadosDoCadastro;
 
@@ -143,70 +142,68 @@ public class CadastroImobiliadrioVetor {
 		return -1;
 	}
 
-	public void pesquisarCpfImovel() {
+	public String pesquisarCpfImovel() {
 		int indice = 0;
-		String naoAchou = "";
-		int esq = 0;
-		int dir = 0;
+		Double imposto1 = 0.0;
+		Double imposto2 = 0.0;
+		Double imposto3 = 0.0;
 		String msg = "";
+		
 		String[] vetorCpf = pesquisarCpf(); // vetor com dados do Imovel.txt
 		// variavel para pegar o vetor do Imovel.txt
 		String cpf = "";
-		
-		String msgEsq="";
-		String inscricaoNaoPago;
-		String inscricao;
-		Double impostoPago;
-		Double impostoNaoPago;
-		Double impostoTotalApagar = 0.0;
-		String pago;
-		String NaoPago;
-		String cpfIguais;
+	
 		for (int i = 0; i < vetorCpf.length; i++) {
 			cpf = vetorCpf[i];
 			indice = pesqBinaria(cpf);
-
+//			System.out.println(indice);
 			if (indice != -1) {
-				if (this.vetor[indice].getCpf().equals(this.vetor[indice-1].getCpf())) {
-					esq = indice - 1;
-					if(this.vetor[esq].isPago()==false) {
-						inscricao=this.vetor[esq].getInscricao();
-						impostoNaoPago=this.vetor[esq].getValor();
-						NaoPago="NÃO PAGO";
-						impostoTotalApagar+=impostoNaoPago;
+				if (this.vetor[indice].getCpf().equals(this.vetor[indice - 1].getCpf())
+						&& this.vetor[indice].getCpf().equals(this.vetor[indice + 1].getCpf())) {
 					
-					}else {
-						inscricao=this.vetor[esq].getInscricao();
-						impostoPago=this.vetor[esq].getValor();
-						pago="PAGO";
-					}
+					imposto1=this.vetor[indice-1].getValor()+this.vetor[indice].getValor()+this.vetor[indice+1].getValor();
 					
-					msg+=this.vetor[esq].getCpf()+":"+"\n"+"Inscr: "+this.vetor[esq].getInscricao()+" "+"Imposto: "+this.vetor[esq].getValor();
-				}
-				if (this.vetor[indice].getCpf().equals(this.vetor[indice+1].getCpf())) {
-					dir = indice + 1;
-							
-					if(this.vetor[dir].isPago()==false) {
-						inscricaoNaoPago=this.vetor[dir].getInscricao();
-						impostoNaoPago=this.vetor[dir].getValor();
-						NaoPago="NÃO PAGO";
-						impostoTotalApagar+=impostoNaoPago;
+					
+					msg += "\nCPF " + this.vetor[indice].getCpf() + ":\n" + "Inscr: "
+							+ this.vetor[indice - 1].getInscricao() + " Imposto: " + this.vetor[indice - 1].getValor()
+							+ (this.vetor[indice-1].isPago()==true? " PAGO":" NÃO PAGO") + "\n" + "Inscr: " + this.vetor[indice].getInscricao() + " Imposto: "
+							+ this.vetor[indice].getValor() + (this.vetor[indice].isPago()==true? " PAGO":" NÃO PAGO") + "\n" + "Inscr: "
+							+ this.vetor[indice + 1].getInscricao() + " Imposto: " + this.vetor[indice + 1].getValor()
+							+ (this.vetor[indice+1].isPago()==true? " PAGO":" NÃO PAGO")+"\n"+
+							"Total Imposto a pagar: "+(imposto1)+"\n";
+				
+				}else {
+					//Verificar se tem igual a esquerda
+					if(this.vetor[indice].getCpf().equals(this.vetor[indice - 1].getCpf())) {
+						imposto2=this.vetor[indice-1].getValor()+this.vetor[indice].getValor();
+						
+						msg += "\nCPF " + this.vetor[indice].getCpf() + ":\n" + "Inscr: "
+								+ this.vetor[indice - 1].getInscricao() + " Imposto: " + this.vetor[indice - 1].getValor()
+								+ (this.vetor[indice-1].isPago()==true? " PAGO":" NÃO PAGO") + "\n" + "Inscr: " + this.vetor[indice].getInscricao() + " Imposto: "
+								+ this.vetor[indice].getValor() + (this.vetor[indice].isPago()==true? " PAGO":" NÃO PAGO") + "\n"+
+								"Total Imposto a pagar: "+(imposto2)+"\n";
 					}else {
-						inscricao=this.vetor[dir].getInscricao();
-						impostoPago=this.vetor[dir].getValor();
-						pago="PAGO";
-					}
-					msg+=this.vetor[dir].getCpf()+":"+"\n"+"Inscr: "+this.vetor[dir].getInscricao()+" "+"Imposto: "+this.vetor[dir].getValor();
+						//Verificar se tem igual a direita
+						if(this.vetor[indice].getCpf().equals(this.vetor[indice + 1].getCpf())) {
+							imposto3=this.vetor[indice+1].getValor()+this.vetor[indice].getValor();
+							msg += "\nCPF " + this.vetor[indice].getCpf() + ":\n" + "Inscr: "
+									+ this.vetor[indice + 1].getInscricao() + " Imposto: " + this.vetor[indice +1].getValor()
+									+ (this.vetor[indice+1].isPago()==true? " PAGO":" NÃO PAGO") + "\n" + "Inscr: " + this.vetor[indice].getInscricao() + " Imposto: "
+									+ this.vetor[indice].getValor() + (this.vetor[indice].isPago()==true? " PAGO":" NÃO PAGO") + "\n"+
+									"Total Imposto a pagar: "+(imposto3)+"\n";
+						}
+					}	
 				}
-				msg+="CPF: "+this.vetor[indice].getCpf()+"\n";
-				System.out.println(msg);
-			} else {
-				if (indice == -1) {
-					naoAchou = cpf;
+				
+			}else {
+				if(indice==-1) {
+					msg += "\nCPF " + cpf+":\n"+"NÃO HÁ NENHUM REGISTRO COM O CPF"+ cpf+"\n";
 				}
 			}
+			
 		}
-
+//		System.out.println(msg);
+		return msg;
 	}
 
 	public String[] pesquisarCpf() {

@@ -1,43 +1,54 @@
 package heap;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
+import java.io.*;
 
-import dados.DadosDoCadastro;
-	
 public class HeapMain {
-	
-	static LeArquivo ler=null;
-	static GravaArquivo gravar=null;
-	static CadastroImobiliadrioVetor vetor=null;
-	
+	static String tipoDoArquivo[] = { "alea", "inv", "ord" };
+	static String lerArquivos = "./src/arquivosDeTeste/Imovel";
+	static String gravarArquivos = "./src/arquivosAlterados/imovel";
+	static String tamanhodoDeRegistro[] = { "500", "1000", "5000", "10000", "50000" };
+	static int quantidadeDeRegistro[] = { 500, 1000, 5000, 10000, 50000 };
+	static LeArquivo ler = null;
+	static GravaArquivo gravarRegistroOrdenado, gravarCpfPesquisado = null;
+	static CadastroImobiliadrioVetor vetor = null;
+
 	public static void main(String[] args) throws IOException {
 		long tempoInicial;
         long tempoFinal;
         long tempoGasto;
-		
+       
         tempoInicial = System.currentTimeMillis();
-        ler = new LeArquivo("./src/arquivosDeTeste/imovel500alea.txt");
-		gravar = new GravaArquivo("./src/arquivosAlterados/imovel500alea.txt");
-	
-		//vetor receber o tamanho 500 e vetor recebe os dados e parametros do metodo lerAruivos.
-		vetor = ler.leArquivo(500);
-		
-		vetor.heapSort();
-//		System.out.println(vetor.toString());
+        
+        for(int i=0;i<5;i++) {
 
-		gravar.gravaArquivo(vetor.toString());
-		vetor.pesquisarCpfImovel();
-		ler.fecharArquivo();
-		gravar.fechaArquivo();
+        	for(int j=0,k=0;j<3;j++) {
+//        		System.out.println("teste"+localDoArquivo+tamanhodoDeRegistro[k]+tipoDoArquivo[j]+".txt");
+        		ler = new LeArquivo(lerArquivos+tamanhodoDeRegistro[k]+tipoDoArquivo[j]+".txt");
+        		gravarRegistroOrdenado = new GravaArquivo(gravarArquivos+tamanhodoDeRegistro[k]+tipoDoArquivo[j]+".txt");
+        		gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"Pesquisado.txt");
+//        		gravarCpfPesquisado = new GravaArquivo("./src/arquivosAlterados/imovelPesquisado.txt");
+        		
+        		//vetor receber o tamanho 500 e vetor recebe os dados e parametros do metodo lerAruivos.
+        		vetor = ler.leArquivo(quantidadeDeRegistro[k]);
+        		
+        		vetor.heapSort();
+//        		System.out.println(vetor.toString());
+
+        		gravarRegistroOrdenado.gravaArquivo(vetor.toString());
+        		gravarCpfPesquisado.gravaArquivo((vetor.pesquisarCpfImovel()));
+        		ler.fecharArquivo();
+        		gravarRegistroOrdenado.fechaArquivo();
+        		gravarCpfPesquisado.fechaArquivo();
+        		
+        		if(k==1) {
+        			k--;
+        		}
+            }   	
+        }
 		
 		tempoFinal = System.currentTimeMillis();
-		tempoGasto = (tempoFinal-tempoInicial);
-//		System.out.println("Tempo de execução: "+tempoGasto+" ms" );
+		tempoGasto = (tempoFinal-tempoInicial)/5;
+		System.out.println("Tempo de execução: "+tempoGasto+" ms" );
 	}
 	
 
