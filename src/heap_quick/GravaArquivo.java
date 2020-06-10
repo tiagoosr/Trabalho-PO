@@ -1,4 +1,4 @@
-package heap;
+package heap_quick;
 
 import java.io.*;
 
