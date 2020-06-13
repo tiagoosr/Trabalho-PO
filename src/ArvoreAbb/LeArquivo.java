@@ -36,9 +36,9 @@ public class LeArquivo {
 				// A função nextLine() devolve a próxima linha como
 				// uma String.
 							
-				cadastro.insere(separaDados(linha));
+				cadastro.inserir(separaDados(linha));
 				
-				System.out.println(cadastro.toString());	
+//				System.out.println(cadastro.toString("07074426629"));	
 			}
 			return cadastro;
 		} catch (ArrayIndexOutOfBoundsException e) {
