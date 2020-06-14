@@ -47,6 +47,32 @@ public class LeArquivo {
 		
 		
 	}
+	
+	public ArvoreAVL leArquivoAvl(int tamanho)
+			throws NoSuchElementException, ArrayIndexOutOfBoundsException {
+		ArvoreAVL cadastro = new ArvoreAVL();	
+		
+		String linha;
+		try {
+			while (this.entrada.hasNext()) {
+				// A função hasNext() indica se ainda existe uma String
+				// para ser lida.
+				
+				linha = this.entrada.nextLine();
+				// A função nextLine() devolve a próxima linha como
+				// uma String.
+							
+				cadastro.insereRaiz(separaDados(linha));
+				
+//				System.out.println(cadastro.toString("07074426629"));	
+			}
+			return cadastro;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new ArrayIndexOutOfBoundsException("Arquivo corrompido");
+		}
+		
+		
+	}
 
 	// Metodo para transformar uma linha do arquivo em um objeto
 	private DadosDoCadastro separaDados(String linha) throws NoSuchElementException {

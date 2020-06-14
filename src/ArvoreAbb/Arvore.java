@@ -3,7 +3,6 @@ package ArvoreAbb;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-
 import dados.DadosDoCadastro;
 
 public class Arvore {
@@ -41,9 +40,9 @@ public class Arvore {
 	// inserir um novo nó na arvore.
 	public boolean inserir(DadosDoCadastro elem) {
 //		if (this.pesquisar(elem.getCpf())) {
-//			this.raiz = inserir(elem, this.raiz);
-//			this.quantNos++;
-//			return true;
+////			this.raiz = inserir(elem, this.raiz);
+////			this.quantNos++;
+//			return false;
 //		} else {
 //			this.raiz = inserir(elem, this.raiz);
 //			this.quantNos++;
@@ -55,37 +54,52 @@ public class Arvore {
 	}
 
 	// Sempre irá inserir em um atributo(esq ou dir) que seja igual a null.
+//	public NoArv inserir(DadosDoCadastro elem, NoArv no) {
+//		if (no == null) {
+//			NoArv novo = new NoArv(elem);
+//			return novo;
+//		} else {
+//			if (elem.getCpf().compareTo(no.getInfo().getCpf()) < 0) {
+//				no.setEsq(inserir(elem, no.getEsq()));
+//				return no;
+//			} else {
+//				if (elem.getCpf().compareTo(no.getInfo().getCpf()) > 0) {
+//					no.setDir(inserir(elem, no.getDir()));
+//					return no;
+//				} else {
+//					if (elem.getCpf().compareTo(no.getInfo().getCpf()) == 0) {
+//						if (no.getDir() == null) {
+//							no.setDir(inserir(elem, no.getDir()));
+//							return no;
+//						} else {
+//							if (elem.getCpf().compareTo(no.getInfo().getCpf()) < 0) {
+//								no.setEsq(inserir(elem, no.getEsq()));
+//								return no;
+//							} else {
+//								no.setDir(inserir(elem, no.getDir()));
+//								return no;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//		return no;
+//	}
+
 	public NoArv inserir(DadosDoCadastro elem, NoArv no) {
 		if (no == null) {
 			NoArv novo = new NoArv(elem);
 			return novo;
 		} else {
-			if (elem.getCpf().compareTo(no.getInfo().getCpf()) < 0) {
+			if (elem.getCpf().compareTo(no.getInfo().getCpf())<0) {
 				no.setEsq(inserir(elem, no.getEsq()));
 				return no;
 			} else {
-				if (elem.getCpf().compareTo(no.getInfo().getCpf()) > 0) {
-					no.setDir(inserir(elem, no.getDir()));
-					return no;
-				} else {
-					if (elem.getCpf().compareTo(no.getInfo().getCpf()) == 0) {
-						if (no.getDir() == null) {
-							no.setDir(inserir(elem, no.getDir()));
-							return no;
-						} else {
-							if (elem.getCpf().compareTo(no.getInfo().getCpf()) < 0) {
-								no.setEsq(inserir(elem, no.getEsq()));
-								return no;
-							} else {
-								no.setDir(inserir(elem, no.getDir()));
-								return no;
-							}
-						}
-					}
-				}
+				no.setDir(inserir(elem, no.getDir()));
+				return no;
 			}
 		}
-		return no;
 	}
 
 	// Pesquisa se um determinado valor está na árvore
@@ -183,46 +197,40 @@ public class Arvore {
 
 	}
 
-	public String pesuisarCpfImovel() {
+	public String pesquisarCpfImovel() {
 		String[] vetorCpf = pesquisarCpf();
 		String cpf = "";
 		String resposta = "";
-		int cont=0;
-		double imposto=0.0;
+		double imposto = 0.0;
 		NoArv aux;
 		for (int i = 0; i < vetorCpf.length; i++) {
 			cpf = vetorCpf[i];
-			
-			NoArv no = pesuisarCpfImovel(cpf, this.raiz);
+
+			NoArv no = pesquisarCpfImovel(cpf, this.raiz);
 			if (no != null) {
 				aux = no;
-				resposta += "\nCPF " +no.getInfo().getCpf()+":\n";
+				resposta += "\nCPF " + no.getInfo().getCpf() + ":\n";
 				while ((no != null) && (no.getInfo().getCpf().compareTo(aux.getInfo().getCpf()) == 0)) {
-					resposta +="Incr: " + no.getInfo().getInscricao()
-							+ " Imposto: " + no.getInfo().getValor() + (no.getInfo().isPago()==true ?" PAGO" : " NÃO PAGO") + "\n";
-					cont++;
+					resposta += "Incr: " + no.getInfo().getInscricao() + " Imposto: " + no.getInfo().getValor()
+							+ (no.getInfo().isPago() == true ? " PAGO" : " NÃO PAGO") + "\n";
+
+					if (no.getInfo().isPago() == false) {
+						imposto += no.getInfo().getValor();
+					}
 					
-					if(no.getInfo().isPago()==false) {
-						imposto+=no.getInfo().getValor();				
-					}
-					if(no!=aux) {
-						resposta+="Total Imposto a pagar: "+imposto+"\n";
-						imposto=0.0;
-					}
 					no = no.getDir();
-					
-					
-//					resposta+="Total Imposto a pagar: "+imposto+"\n";
-//					imposto=0.0;
+					resposta += "Total Imposto a pagar: " + imposto + "\n";
+					imposto = 0.0;
 				}
+			} else {
+				resposta += "\nCPF " + cpf + ":\n" + "NÃO HÁ NENHUM REGISTRO COM O CPF: " + cpf + "\n";
 			}
 		}
-		System.out.println(cont);
 		return resposta;
-		
+
 	}
 
-	private NoArv pesuisarCpfImovel(String chave, NoArv no) {
+	private NoArv pesquisarCpfImovel(String chave, NoArv no) {
 		if (no != null) {
 			if (chave.compareTo(no.getInfo().getCpf()) < 0) {
 				no = pesquisar(chave, no.getEsq());

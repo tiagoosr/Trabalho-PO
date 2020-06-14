@@ -10,7 +10,9 @@ public class NoArv {
 		this.info = elem;
 		this.esq = null;
 		this.dir = null;
+	
 	}
+	
 	public NoArv getEsq(){
 		return this.esq;
 	}
