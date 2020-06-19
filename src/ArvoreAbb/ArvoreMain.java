@@ -36,47 +36,20 @@ public class ArvoreMain {
 //		arvore.pesquisarCpfImovel();
 //		System.out.println(vetorOrdenado.resultado());
 		
-//		for (int i = 0; i < tamanhodoDeRegistro.length; i++) {
-//			tempoInicial = System.currentTimeMillis();
-//			for (int j = 0; j < 5; j++) {
-//				for (int k = 0; k < 3; k++) {
-//					ler = new LeArquivo(lerArquivos + tamanhodoDeRegistro[i] + tipoDoArquivo[k] + ".txt");
-//					gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"arquivosPesquisados/Abb-AVL/" + "ABB"+tipoDoArquivo[k] +tamanhodoDeRegistro[i]+".txt");
-//		
-//					arvore = ler.leArquivo(quantidadeDeRegistro[i]);
-//					vetorOrdenado = new TabelaOrd(quantidadeDeRegistro[i]);//passa um tamanho para o vetor.
-//					arvore.CamCentral(vetorOrdenado);//metodo para ordenar e inserir no vetor.
-//					arvore.ArvoreBalanceada(vetorOrdenado);//metodo para pegar o elemento no vetor e montar a arvore balanceada.
-//					ler.fecharArquivo();
-//					
-//					gravarCpfPesquisado.gravaArquivo((arvore.pesquisarCpfImovel()));
-//					gravarCpfPesquisado.fechaArquivo();
-//				}		
-//			}
-//			tempoFinal = System.currentTimeMillis();
-//			tempoTotal = tempoFinal-tempoInicial;
-//			mediaDotempoGasto = tempoTotal / 5;
-//			
-//			mediaDotempoGastoEmString = "Media: "+Long.toString(mediaDotempoGasto);
-//			gravarResultadoDaMedia = new GravaArquivo(gravarArquivos+"mediaDeTempo/"+"ABB"+tamanhodoDeRegistro[i]+".txt");
-//			gravarResultadoDaMedia.gravaArquivo(mediaDotempoGastoEmString);
-//			gravarResultadoDaMedia.fechaArquivo();
-//			System.out.println("Tempo de execução: ABB " + i +" "+ mediaDotempoGastoEmString + " ms");
-//		}
-		
 		for (int i = 0; i < tamanhodoDeRegistro.length; i++) {
 			tempoInicial = System.currentTimeMillis();
 			for (int j = 0; j < 5; j++) {
 				for (int k = 0; k < 3; k++) {
-					
 					ler = new LeArquivo(lerArquivos + tamanhodoDeRegistro[i] + tipoDoArquivo[k] + ".txt");
-					gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"arquivosPesquisados/Abb-AVL/" + "AVL"+tipoDoArquivo[k] +tamanhodoDeRegistro[i]+".txt");
+					gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"arquivosPesquisados/Abb-AVL/" + "ABB"+tipoDoArquivo[k] +tamanhodoDeRegistro[i]+".txt");
 		
-					avl = ler.leArquivoAvl(quantidadeDeRegistro[i]);
-					avl.pesquisarCpfImovel();
+					arvore = ler.leArquivo(quantidadeDeRegistro[i]);
+					vetorOrdenado = new TabelaOrd(quantidadeDeRegistro[i]);//passa um tamanho para o vetor.
+					arvore.CamCentral(vetorOrdenado);//metodo para ordenar e inserir no vetor.
+					arvore.ArvoreBalanceada(vetorOrdenado);//metodo para pegar o elemento no vetor e montar a arvore balanceada.
 					ler.fecharArquivo();
 					
-					gravarCpfPesquisado.gravaArquivo((avl.pesquisarCpfImovel()));
+					gravarCpfPesquisado.gravaArquivo((arvore.pesquisarCpfImovel()));
 					gravarCpfPesquisado.fechaArquivo();
 				}		
 			}
@@ -90,6 +63,33 @@ public class ArvoreMain {
 			gravarResultadoDaMedia.fechaArquivo();
 			System.out.println("Tempo de execução: ABB " + i +" "+ mediaDotempoGastoEmString + " ms");
 		}
+		
+//		for (int i = 0; i < tamanhodoDeRegistro.length; i++) {
+//			tempoInicial = System.currentTimeMillis();
+//			for (int j = 0; j < 5; j++) {
+//				for (int k = 0; k < 3; k++) {
+//					
+//					ler = new LeArquivo(lerArquivos + tamanhodoDeRegistro[i] + tipoDoArquivo[k] + ".txt");
+//					gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"arquivosPesquisados/Abb-AVL/" + "AVL"+tipoDoArquivo[k] +tamanhodoDeRegistro[i]+".txt");
+//		
+//					avl = ler.leArquivoAvl(quantidadeDeRegistro[i]);
+//					avl.pesquisarCpfImovel();
+//					ler.fecharArquivo();
+//					
+//					gravarCpfPesquisado.gravaArquivo((avl.pesquisarCpfImovel()));
+//					gravarCpfPesquisado.fechaArquivo();
+//				}		
+//			}
+//			tempoFinal = System.currentTimeMillis();
+//			tempoTotal = tempoFinal-tempoInicial;
+//			mediaDotempoGasto = tempoTotal / 5;
+//			
+//			mediaDotempoGastoEmString = "Media: "+Long.toString(mediaDotempoGasto);
+//			gravarResultadoDaMedia = new GravaArquivo(gravarArquivos+"mediaDeTempo/"+"ABB"+tamanhodoDeRegistro[i]+".txt");
+//			gravarResultadoDaMedia.gravaArquivo(mediaDotempoGastoEmString);
+//			gravarResultadoDaMedia.fechaArquivo();
+//			System.out.println("Tempo de execução: ABB " + i +" "+ mediaDotempoGastoEmString + " ms");
+//		}
 		
 		
 //		ler = new LeArquivo(lerArquivos + tamanhodoDeRegistro[0] + tipoDoArquivo[0] + ".txt");
