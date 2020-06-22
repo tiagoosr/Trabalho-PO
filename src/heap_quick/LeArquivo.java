@@ -20,8 +20,7 @@ public class LeArquivo {
 	
 	
 	// Metodo para ler os dados contidos no arquivo
-	public CadastroImobiliadrioVetor leArquivo(int tamanho)
-			throws NoSuchElementException, ArrayIndexOutOfBoundsException {
+	public CadastroImobiliadrioVetor leArquivo(int tamanho) throws NoSuchElementException, ArrayIndexOutOfBoundsException {
 		CadastroImobiliadrioVetor cadastro = new CadastroImobiliadrioVetor(tamanho);
 	
 		String linha;

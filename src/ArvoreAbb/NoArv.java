@@ -3,7 +3,7 @@ package ArvoreAbb;
 import dados.DadosDoCadastro;
 
 public class NoArv {
-	private DadosDoCadastro info; // o tipo Item está declarado no capítulo 1
+	private DadosDoCadastro info;
 	private NoArv esq, dir;
 
 	public NoArv(DadosDoCadastro elem){

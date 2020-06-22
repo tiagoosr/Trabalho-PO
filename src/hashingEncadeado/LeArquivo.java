@@ -21,9 +21,8 @@ public class LeArquivo {
 	}
 
 	// Metodo para ler os dados contidos no arquivo
-	public VetorHashing leArquivo(int tamanho)
-			throws NoSuchElementException, ArrayIndexOutOfBoundsException {
-		
+	public VetorHashing leArquivo(int tamanho) throws NoSuchElementException, ArrayIndexOutOfBoundsException {
+
 		VetorHashing cadastro = new VetorHashing(tamanho);
 
 		String linha;
@@ -33,12 +32,12 @@ public class LeArquivo {
 				// para ser lida.
 
 				linha = this.entrada.nextLine();
-				// A função nextLine() devolve a próxima linha como
-				// uma String.
-//				System.out.println(cadastro.toString());
+				// A função nextLine() devolve a próxima linha como uma String.
+				System.out.println(cadastro.toString());
 				cadastro.inserir(separaDados(linha), tamanho);
 
 			}
+			
 			return cadastro;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new ArrayIndexOutOfBoundsException("Arquivo corrompido");
