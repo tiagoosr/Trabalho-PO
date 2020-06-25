@@ -24,17 +24,7 @@ public class ArvoreMain {
 		long mediaDotempoGasto = 0;
 		String mediaDotempoGastoEmString;
 		
-//		ler = new LeArquivo(lerArquivos + tamanhodoDeRegistro[0] + tipoDoArquivo[0] + ".txt");
-//		arvore = ler.leArquivo(500);//ler o arquivo de tammanho n.
-//		vetorOrdenado = new TabelaOrd(quantidadeDeRegistro[0]);//passa um tamanho para o vetor.
-//		arvore.CamCentral(vetorOrdenado);//metodo para ordenar e inserir no vetor.
-//		arvore.ArvoreBalanceada(vetorOrdenado);//metodo para pegar o elemento no vetor e montar a arvore balanceada.
-////		
-//		gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"arquivosPesquisados/" + "QuickPesquisado"+tipoDoArquivo[0] +tamanhodoDeRegistro[0] +".txt");
-//		System.out.println(arvore.pesquisarCpfImovel());
-//		arvore.pesquisarCpfImovel();
-//		System.out.println(vetorOrdenado.resultado());
-		/*
+		
 		for (int i = 0; i < tamanhodoDeRegistro.length; i++) {
 			tempoInicial = System.currentTimeMillis();
 			for (int j = 0; j < 5; j++) {
@@ -62,7 +52,7 @@ public class ArvoreMain {
 			gravarResultadoDaMedia.fechaArquivo();
 			System.out.println("Tempo de execução: ABB " + i +" "+ mediaDotempoGastoEmString + " ms");
 		}
-		*/
+		
 		for (int i = 0; i < tamanhodoDeRegistro.length; i++) {
 			tempoInicial = System.currentTimeMillis();
 			for (int j = 0; j < 5; j++) {
@@ -89,19 +79,6 @@ public class ArvoreMain {
 			gravarResultadoDaMedia.fechaArquivo();
 			System.out.println("Tempo de execução: ABB " + i +" "+ mediaDotempoGastoEmString + " ms");
 		}
-		
-		
-//		ler = new LeArquivo(lerArquivos + tamanhodoDeRegistro[0] + tipoDoArquivo[0] + ".txt");
-//		avl = ler.leArquivoAvl(500);//ler o arquivo de tammanho n.
-//		System.out.println(avl.pesquisarCpfImovel());
-//		vetorOrdenado = new TabelaOrd(quantidadeDeRegistro[0]);//passa um tamanho para o vetor.
-//		arvore.CamCentral(vetorOrdenado);//metodo para ordenar e inserir no vetor.
-//		arvore.ArvoreBalanceada(vetorOrdenado);//metodo para pegar o elemento no vetor e montar a arvore balanceada.
-		
-//		gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"arquivosPesquisados/" + "QuickPesquisado"+tipoDoArquivo[k] +tamanhodoDeRegistro[i] +".txt");
-//		System.out.println(arvore.pesuisarCpfImovel());
-//		arvore.pesuisarCpfImovel();
-//		System.out.println(vetorOrdenado.resultado());
 		
 	}
 
