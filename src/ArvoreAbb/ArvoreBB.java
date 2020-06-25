@@ -5,12 +5,12 @@ import java.io.FileReader;
 
 import dados.DadosDoCadastro;
 
-public class Arvore {
+public class ArvoreBB {
 	private NoArv raiz;
 	private int quantNos;
 
 	// construtor da arvore
-	public Arvore() {
+	public ArvoreBB() {
 		this.quantNos = 0;
 		this.raiz = null;
 	}
@@ -35,58 +35,16 @@ public class Arvore {
 		this.quantNos = novo;
 	}
 
-//
+
 
 	// inserir um novo nó na arvore.
 	public boolean inserir(DadosDoCadastro elem) {
-//		if (this.pesquisar(elem.getCpf())) {
-////			this.raiz = inserir(elem, this.raiz);
-////			this.quantNos++;
-//			return false;
-//		} else {
-//			this.raiz = inserir(elem, this.raiz);
-//			this.quantNos++;
-//			return true;
-//		}
 		this.raiz = inserir(elem, this.raiz);
 		this.quantNos++;
 		return true;
 	}
 
 	// Sempre irá inserir em um atributo(esq ou dir) que seja igual a null.
-//	public NoArv inserir(DadosDoCadastro elem, NoArv no) {
-//		if (no == null) {
-//			NoArv novo = new NoArv(elem);
-//			return novo;
-//		} else {
-//			if (elem.getCpf().compareTo(no.getInfo().getCpf()) < 0) {
-//				no.setEsq(inserir(elem, no.getEsq()));
-//				return no;
-//			} else {
-//				if (elem.getCpf().compareTo(no.getInfo().getCpf()) > 0) {
-//					no.setDir(inserir(elem, no.getDir()));
-//					return no;
-//				} else {
-//					if (elem.getCpf().compareTo(no.getInfo().getCpf()) == 0) {
-//						if (no.getDir() == null) {
-//							no.setDir(inserir(elem, no.getDir()));
-//							return no;
-//						} else {
-//							if (elem.getCpf().compareTo(no.getInfo().getCpf()) < 0) {
-//								no.setEsq(inserir(elem, no.getEsq()));
-//								return no;
-//							} else {
-//								no.setDir(inserir(elem, no.getDir()));
-//								return no;
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
-//		return no;
-//	}
-
 	public NoArv inserir(DadosDoCadastro elem, NoArv no) {
 		if (no == null) {
 			NoArv novo = new NoArv(elem);
@@ -126,22 +84,6 @@ public class Arvore {
 		return no;
 	}
 
-//	public DadosDoCadastro[] CamCentral() {
-//		int[] n = new int[1];
-//		n[0] = 0;
-//		DadosDoCadastro[] vet = new DadosDoCadastro[this.quantNos];
-//		return (FazCamCentral(this.raiz, vet, n));
-//	}
-//
-//	private DadosDoCadastro[] FazCamCentral(NoArv arv, DadosDoCadastro[] vet, int[] n) {
-//		if (arv != null) {
-//			vet = FazCamCentral(arv.getEsq(), vet, n);
-//			vet[n[0]] = arv.getInfo();
-//			n[0]++;
-//			vet = FazCamCentral(arv.getDir(), vet, n);
-//		}
-//		return vet;
-//	}
 
 	public TabelaOrd CamCentral(TabelaOrd vetOrdenado) {
 		return (this.FazCamCentral(this.raiz, vetOrdenado));
@@ -156,13 +98,13 @@ public class Arvore {
 		return vetOrdenado;
 	}
 
-	public Arvore ArvoreBalanceada(TabelaOrd vetOrdenado) {
-		Arvore temp = new Arvore();
+	public ArvoreBB ArvoreBalanceada(TabelaOrd vetOrdenado) {
+		ArvoreBB temp = new ArvoreBB();
 		this.Balancear(vetOrdenado, temp, 0, vetOrdenado.getQuantVet() - 1);
 		return temp;
 	}
 
-	private void Balancear(TabelaOrd vet, Arvore temp, int inic, int fim) {
+	private void Balancear(TabelaOrd vet, ArvoreBB temp, int inic, int fim) {
 		int meio;
 		if (fim >= inic) {
 			meio = (inic + fim) / 2;

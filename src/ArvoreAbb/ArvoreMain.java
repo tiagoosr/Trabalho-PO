@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import heap_quick.GravaArquivo;
 
-
 public class ArvoreMain {
 	static String tipoDoArquivo[] = { "Alea", "Inv", "Ord" };
 	static String lerArquivos = "./src/arquivosDeTeste/Imovel";
@@ -14,7 +13,7 @@ public class ArvoreMain {
 	static LeArquivo ler = null;
 	static GravaArquivo gravarCpfPesquisado, gravarResultadoDaMedia = null;
 	
-	static Arvore arvore = null;
+	static ArvoreBB arvoreBB = null;
 	static ArvoreAVL avl = null ;
 	static TabelaOrd vetorOrdenado;
 	public static void main(String[] args) throws IOException {
@@ -35,35 +34,35 @@ public class ArvoreMain {
 //		System.out.println(arvore.pesquisarCpfImovel());
 //		arvore.pesquisarCpfImovel();
 //		System.out.println(vetorOrdenado.resultado());
+		/*
+		for (int i = 0; i < tamanhodoDeRegistro.length; i++) {
+			tempoInicial = System.currentTimeMillis();
+			for (int j = 0; j < 5; j++) {
+				for (int k = 0; k < 3; k++) {
+					ler = new LeArquivo(lerArquivos + tamanhodoDeRegistro[i] + tipoDoArquivo[k] + ".txt");
+					gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"arquivosPesquisados/Abb-AVL/" + "ABB"+tipoDoArquivo[k] +tamanhodoDeRegistro[i]+".txt");
 		
-//		for (int i = 0; i < tamanhodoDeRegistro.length; i++) {
-//			tempoInicial = System.currentTimeMillis();
-//			for (int j = 0; j < 5; j++) {
-//				for (int k = 0; k < 3; k++) {
-//					ler = new LeArquivo(lerArquivos + tamanhodoDeRegistro[i] + tipoDoArquivo[k] + ".txt");
-//					gravarCpfPesquisado = new GravaArquivo(gravarArquivos+"arquivosPesquisados/Abb-AVL/" + "ABB"+tipoDoArquivo[k] +tamanhodoDeRegistro[i]+".txt");
-//		
-//					arvore = ler.leArquivo(quantidadeDeRegistro[i]);
-//					vetorOrdenado = new TabelaOrd(quantidadeDeRegistro[i]);//passa um tamanho para o vetor.
-//					arvore.CamCentral(vetorOrdenado);//metodo para ordenar e inserir no vetor.
-//					arvore.ArvoreBalanceada(vetorOrdenado);//metodo para pegar o elemento no vetor e montar a arvore balanceada.
-//					ler.fecharArquivo();
-//					
-//					gravarCpfPesquisado.gravaArquivo((arvore.pesquisarCpfImovel()));
-//					gravarCpfPesquisado.fechaArquivo();
-//				}		
-//			}
-//			tempoFinal = System.currentTimeMillis();
-//			tempoTotal = tempoFinal-tempoInicial;
-//			mediaDotempoGasto = tempoTotal / 5;
-//			
-//			mediaDotempoGastoEmString = "Media: "+Long.toString(mediaDotempoGasto);
-//			gravarResultadoDaMedia = new GravaArquivo(gravarArquivos+"mediaDeTempo/"+"ABB"+tamanhodoDeRegistro[i]+".txt");
-//			gravarResultadoDaMedia.gravaArquivo(mediaDotempoGastoEmString);
-//			gravarResultadoDaMedia.fechaArquivo();
-//			System.out.println("Tempo de execução: ABB " + i +" "+ mediaDotempoGastoEmString + " ms");
-//		}
-		
+					arvoreBB = ler.leArquivo(quantidadeDeRegistro[i]);
+					vetorOrdenado = new TabelaOrd(quantidadeDeRegistro[i]);//passa um tamanho para o vetor.
+					arvoreBB.CamCentral(vetorOrdenado);//metodo para ordenar e inserir no vetor.
+					arvoreBB.ArvoreBalanceada(vetorOrdenado);//metodo para pegar o elemento no vetor e montar a arvore balanceada.
+					ler.fecharArquivo();
+					
+					gravarCpfPesquisado.gravaArquivo((arvoreBB.pesquisarCpfImovel()));
+					gravarCpfPesquisado.fechaArquivo();
+				}		
+			}
+			tempoFinal = System.currentTimeMillis();
+			tempoTotal = tempoFinal-tempoInicial;
+			mediaDotempoGasto = tempoTotal / 5;
+			
+			mediaDotempoGastoEmString = "Media: "+Long.toString(mediaDotempoGasto);
+			gravarResultadoDaMedia = new GravaArquivo(gravarArquivos+"mediaDeTempo/"+"ABB"+tamanhodoDeRegistro[i]+".txt");
+			gravarResultadoDaMedia.gravaArquivo(mediaDotempoGastoEmString);
+			gravarResultadoDaMedia.fechaArquivo();
+			System.out.println("Tempo de execução: ABB " + i +" "+ mediaDotempoGastoEmString + " ms");
+		}
+		*/
 		for (int i = 0; i < tamanhodoDeRegistro.length; i++) {
 			tempoInicial = System.currentTimeMillis();
 			for (int j = 0; j < 5; j++) {

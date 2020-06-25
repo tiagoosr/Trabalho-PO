@@ -10,6 +10,7 @@ import dados.DadosDoCadastro;
 public class LeArquivo {
 	// objeto do tipo Scanner para realizar a leitura dos dados do arquivo.
 	private Scanner entrada;
+	
 	public LeArquivo(String nome) throws FileNotFoundException {
 		try {
 			// Instanciamento do objeto do tipo Scanner, tendo como argumento File que será
@@ -22,9 +23,8 @@ public class LeArquivo {
 	
 	
 	// Metodo para ler os dados contidos no arquivo
-	public Arvore leArquivo(int tamanho)
-			throws NoSuchElementException, ArrayIndexOutOfBoundsException {
-		Arvore cadastro = new Arvore();	
+	public ArvoreBB leArquivo(int tamanho) throws NoSuchElementException, ArrayIndexOutOfBoundsException {
+		ArvoreBB cadastro = new ArvoreBB();	
 		
 		String linha;
 		try {
