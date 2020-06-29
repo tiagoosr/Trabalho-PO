@@ -1,4 +1,4 @@
-package ArvoreAbb;
+package Arvore;
 
 import dados.DadosDoCadastro;
 

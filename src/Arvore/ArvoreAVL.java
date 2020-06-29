@@ -1,4 +1,4 @@
-package ArvoreAbb;
+package Arvore;
 
 
 import java.io.BufferedReader;

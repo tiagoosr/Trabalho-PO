@@ -89,35 +89,7 @@ public class HeapQuickMain {
 			gravarResultadoDaMedia.fechaArquivo();
 			System.out.println("Tempo de execução: Quick " + i +" "+ mediaDotempoGastoEmString + " ms");
 		}
-	
-/*
-		// QuickSort + Pesquisa Binária
-		tempoInicial = System.currentTimeMillis();
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0, k = 0; j < 3; j++) {
-//	        	System.out.println("teste"+lerArquivos+tamanhodoDeRegistro[k]+tipoDoArquivo[j]+".txt");
-				
 
-				// vetor receber o tamanho 500 e vetor recebe os dados e parametros do metodo
-				vetor = ler.leArquivo(quantidadeDeRegistro[k]);
-
-				vetor.quicksort();
-//	        	system.out.println(vetor.toString());
-
-				gravarRegistroOrdenado.gravaArquivo(vetor.toString());
-				gravarCpfPesquisado.gravaArquivo((vetor.pesquisarCpfImovel()));
-				ler.fecharArquivo();
-				gravarRegistroOrdenado.fechaArquivo();
-				gravarCpfPesquisado.fechaArquivo();
-
-			}
-			
-		}
-		tempoFinal = System.currentTimeMillis();
-		tempoTotal = tempoFinal-tempoInicial;
-		mediaDotempoGasto = tempoTotal / 5;
-		System.out.println("Tempo de execução: " + mediaDotempoGasto + " ms");
-		*/
 	}
 
 }

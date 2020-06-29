@@ -215,8 +215,7 @@ public class CadastroImobiliadrioVetor {
 
 			if (indice != -1) {
 				int pos = 0;
-				if (this.vetor[indice].getCpf().equals(this.vetor[indice - 1].getCpf())
-						&& this.vetor[indice].getCpf().equals(this.vetor[indice + 1].getCpf())) {
+				if (this.vetor[indice].getCpf().equals(this.vetor[indice - 1].getCpf()) && this.vetor[indice].getCpf().equals(this.vetor[indice + 1].getCpf())) {
 					pos = indice - 1;
 
 					msg += "\nCPF " + this.vetor[indice].getCpf()+":\n";
